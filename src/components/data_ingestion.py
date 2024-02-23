@@ -4,6 +4,7 @@ import pandas as pd
 from src.logger import logging
 from dataclasses import dataclass
 from src.exception import CustomException
+from src.components.data_transformation import DataTransformation
 from sklearn.model_selection import train_test_split
 
 
@@ -26,7 +27,7 @@ class DataIngestion:
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
 
-            df.to_csv(os.path.join(self.ingestion_config.train_data_path), index=False)
+            df.to_csv(os.path.join(self.ingestion_config.raw_data_path), index=False)
 
             train_set, test_set = train_test_split(df, random_state=40, test_size=.2)
 
@@ -43,6 +44,7 @@ class DataIngestion:
             raise CustomException(e, sys)
 
 
-# if __name__ == '__main__':
-#     obj = DataIngestion()
-#     train_data, test_data = obj.initiate_data_ingestion()
+if __name__ == '__main__':
+    obj = DataIngestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+    DataTransformation().initiate_data_transformation(train_data, test_data, 'math_score')
