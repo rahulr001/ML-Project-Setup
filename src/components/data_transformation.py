@@ -17,7 +17,7 @@ class DataTransformationConfig:
     preprocessor_obj_file_path = os.path.join('artifacts', 'preprocessor.pkl')
 
 
-class DataTransformation:
+class DataTransformation(Helpers):
 
     def __init__(self):
         self.preprocessor_config = DataTransformationConfig()
@@ -76,7 +76,7 @@ class DataTransformation:
             train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
-            Helpers.save_object(self.preprocessor_config.preprocessor_obj_file_path, preprocessor)
+            self.save_object(self.preprocessor_config.preprocessor_obj_file_path, preprocessor)
 
             logging.info('Data Transformation Started')
             return train_arr, test_arr, self.preprocessor_config.preprocessor_obj_file_path,
