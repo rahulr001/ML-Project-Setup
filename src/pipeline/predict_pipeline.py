@@ -42,7 +42,7 @@ class CustomData:
                 "lunch": [self.lunch],
                 "test_preparation_course": [self.test_preparation_course],
                 "reading_score": [self.reading_score],
-                "writing_score": [self.writing_score],
+                "writing_score": [self.writing_score]
             }
 
             return pd.DataFrame(custom_data_input_dict)
